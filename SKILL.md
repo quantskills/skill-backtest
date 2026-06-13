@@ -1,6 +1,30 @@
 ---
 name: backtest
-description: 通用截面多头回测 —— T+1 开盘买入、Top 分位等权、双边手续费、涨跌停剔除、四联诊断图（净值/累计 IC/分组收益/回撤）。触发词：回测、跑回测、backtest、多头组合、净值曲线、benchmark 对比。
+description: Use when an agent needs a standard cross-sectional long-only backtest
+  protocol with T+1 open execution, top-bucket equal weighting, fees, limit-up or
+  limit-down exclusions, benchmark comparison, NAV curves, drawdown, IC, and diagnostic
+  charts.
+quantSkills:
+  project_type: skill
+  category: tooling
+  tags:
+  - backtest
+  - cross-section
+  - long-only
+  - diagnostics
+  - quant-research
+  platforms:
+  - claude-code
+  - codex
+  - openclaw
+  - cursor
+  status: stable
+  validation_level: listed
+  maintainer_type: community
+  summary_zh: 不是回测框架，而是截面多头回测的标准协议：T+1 开盘成交、Top 等权、双边 15bp、涨跌停剔除、四联诊断图、5 项健康度自检。
+  summary_en: Standard cross-sectional long-only backtest protocol with T+1 execution,
+    fees, limit filters, NAV curves, IC, drawdown, and diagnostic charts.
+  license: GPL-3.0
 ---
 
 # Backtest
