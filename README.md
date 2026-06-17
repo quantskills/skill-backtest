@@ -6,6 +6,7 @@
 
 `role: skill` `output: NAV + diagnostic charts` `paradigm: cross-section long-only`
 
+
 ---
 
 `skill-backtest` 是 PandaAI Quant Skills 提供的**截面多头回测 Skill**。它把"信号 → 真金白银的净值曲线"这条链路标准化：用统一的成交假设、统一的手续费、统一的诊断图，让不同因子的回测结果可以横向对比。
@@ -126,3 +127,11 @@ skill-backtest/
 This repository is licensed under the GNU General Public License v3.0. See LICENSE.
 
 Copyright (C) 2026 QuantSkills.
+
+## 🐼 PandaAI / QUANTSKILLS 社群
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/quantskills/.github/main/profile/assets/pandaai-community-qr.jpg" alt="PandaAI 社群二维码" width="220">
+  <br>
+  <sub>扫码加入 PandaAI 社群，交流 QUANTSKILLS 技能、Agent 工作流与量化研究实践。</sub>
+</div>
