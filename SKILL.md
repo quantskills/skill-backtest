@@ -27,6 +27,62 @@ quantSkills:
   license: GPL-3.0
 ---
 
+```json qsh-form
+{
+  "version": 1,
+  "task": {
+    "placeholder": "补充信号文件、回测区间、基准或特殊假设（可选）"
+  },
+  "fields": [
+    {
+      "key": "factor",
+      "label": "内置因子",
+      "type": "select",
+      "default": "momentum_20",
+      "help": "填写自定义表达式时以表达式为准",
+      "options": [
+        { "value": "momentum_20", "label": "20日动量" },
+        { "value": "reversal_5", "label": "5日反转" },
+        { "value": "lowvol_20", "label": "20日低波动" },
+        { "value": "alpha101_101", "label": "Alpha101 #101" },
+        { "value": "alpha101_12", "label": "Alpha101 #12" },
+        { "value": "corr_open_vol", "label": "量价背离" }
+      ]
+    },
+    {
+      "key": "expr",
+      "label": "自定义因子表达式",
+      "type": "textarea",
+      "placeholder": "例如：-1 * correlation(rank(open), rank(volume), 10)"
+    },
+    {
+      "key": "universe",
+      "label": "股票池",
+      "type": "select",
+      "default": "000300.SH",
+      "options": [
+        { "value": "000300.SH", "label": "沪深300" },
+        { "value": "000905.SH", "label": "中证500" },
+        { "value": "399006.SZ", "label": "创业板指" },
+        { "value": "000852.SH", "label": "中证1000" }
+      ]
+    },
+    {
+      "key": "horizon",
+      "label": "持有周期",
+      "type": "select",
+      "default": "5",
+      "options": [
+        { "value": "1", "label": "1日" },
+        { "value": "5", "label": "5日" },
+        { "value": "10", "label": "10日" }
+      ]
+    }
+  ],
+  "prompt_template": "{{#task}}任务与材料：\n{{task}}\n\n{{/task}}{{#attachments}}用户上传的材料（已放入工作区）：\n{{attachments}}\n\n{{/attachments}}对 {{universe}} 中的因子 {{factor}}{{#expr}}（自定义表达式优先：{{expr}}）{{/expr}} 按 {{horizon}} 日持有周期执行标准截面多头回测，严格采用 T+1 开盘成交、Top 10% 等权、滚动持仓、双边费用、涨跌停与停牌过滤，比较基准并给出净值、回撤、换手、IC、分层收益和健康度诊断，输出中文报告。"
+}
+```
+
 # Backtest
 
 > 把信号 `[date × symbol]` 模拟交易出来，得到净值 / 回撤 / 换手 / 分组收益。从"统计相关"走向"可执行收益"的关键一步。
