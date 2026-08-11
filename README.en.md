@@ -1,5 +1,9 @@
 # skill-backtest
 
+## Executable DAG interface
+
+`scripts/backtest_dag.py` accepts `factor-panel@1.0.0` and `market-bar@1.0.0` JSON envelopes and requires explicit strategy, horizon, top percentile, fee, and output arguments. It rejects multiple factors, neutral direction, missing tradability or limit evidence, and non-bijective native/canonical records; it emits `backtest-result@1.0.0`, `evaluation-result@1.0.0`, and a hashed internal return-series artifact. Research and education only; not investment advice.
+
 [简体中文](./README.md) | [English](./README.en.md)
 
 Not a backtest framework, but a **standard protocol for cross-section long-only backtesting**: T+1 open execution, Top equal weight, 15bp two-way fee, limit-up/down exclusion, 4-panel diagnostic chart, 5-item health check.
