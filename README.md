@@ -1,5 +1,11 @@
 # skill-backtest
 
+Parameters: horizon, top percentile, and fee basis points are explicit. This is for research and education only and does not constitute investment advice.
+
+## 可执行 DAG 接口
+
+`scripts/backtest_dag.py` 接收 `factor-panel@1.0.0` 与 `market-bar@1.0.0` JSON envelope，要求显式传入策略、持有期、Top 比例、费率和输出目录。它拒绝多因子、neutral 方向、缺少交易状态/涨跌停依据及原生记录与 canonical 记录非严格一一对应的输入；输出 `backtest-result@1.0.0`、`evaluation-result@1.0.0` 与带哈希的内部收益序列 artifact。仅供研究和教育，不构成投资建议。
+
 [简体中文](./README.md) | [English](./README.en.md)
 
 不是回测框架，而是**截面多头回测的标准协议**：T+1 开盘成交、Top 等权、双边 15bp、涨跌停剔除、四联诊断图、5 项健康度自检。

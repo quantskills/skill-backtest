@@ -1,5 +1,53 @@
 ---
 name: backtest
+description: Run a deterministic cross-sectional long-only backtest DAG from versioned factor-panel and market-bar envelopes, with strict T+1 execution, tradability evidence, return-series artifacts, and evaluation outputs. Use when an agent must execute or validate this backtest contract.
+license: GPL-3.0-only
+supported-runtimes: [cursor, claude-code, codex, hermes, openclaw]
+author: abgyjaguo
+metadata:
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: skill-backtest
+  repository_url: https://github.com/quantskills/skill-backtest
+  project_type: skill
+  collection: backtesting-trading
+  creator: abgyjaguo
+  maintainer: abgyjaguo
+quantSkills:
+  schema_version: 2.1.0
+  organization: quantskills
+  organization_url: https://github.com/quantskills
+  repository: skill-backtest
+  repository_url: https://github.com/quantskills/skill-backtest
+  project_type: skill
+  license: GPL-3.0-only
+  maintainer: abgyjaguo
+  collection: backtesting-trading
+  catalog: {category: "05", subcategory: 05.backtest-engine}
+  workflow:
+    primary_stage: backtesting
+    workflow_stages: [data-ingestion, backtesting, evaluation]
+  tags: [backtest, cross-section, long-only, deterministic]
+  summary_zh: 提供带严格输入证据校验和 T+1 执行约束的横截面多头回测 DAG。
+  summary_en: Runs deterministic cross-sectional long-only backtests with strict evidence validation and T+1 execution.
+  status: active
+  validation_level: verified
+  maintainer_type: community
+  platforms: [cursor, claude-code, codex, hermes, openclaw]
+  interface:
+    mode: structured
+    envelope: {name: quantskills-envelope, version: 1.0.0}
+    inputs:
+      - {profile: factor-panel, version_range: ">=1.0.0 <2.0.0", required: true}
+      - {profile: market-bar, version_range: ">=1.0.0 <2.0.0", required: true}
+    outputs:
+      - {profile: backtest-result, version: 1.0.0}
+      - {profile: evaluation-result, version: 1.0.0}
+    adapters: []
+---
+<!-- Legacy declaration retained below as historical text; canonical metadata is above. -->
+---
+name: backtest
 description: Use when an agent needs a standard cross-sectional long-only backtest
   protocol with T+1 open execution, top-bucket equal weighting, fees, limit-up or
   limit-down exclusions, benchmark comparison, NAV curves, drawdown, IC, and diagnostic
@@ -84,6 +132,22 @@ quantSkills:
 ```
 
 # Backtest
+
+This skill is for research and education only and does not constitute investment advice. Parameters are explicit: horizon, top percentile, and fee basis points.
+
+## Deterministic DAG entrypoint
+
+Run `scripts/backtest_dag.py` only with explicit factor, market, strategy, horizon,
+top-percentile, fee, and output arguments. It accepts `factor-panel@1.0.0` and
+`market-bar@1.0.0`, rejects ambiguous factor IDs and market data without preserved
+trading-status and limit evidence, and writes `backtest-result@1.0.0`,
+`evaluation-result@1.0.0`, and a hashed internal return-series artifact. It never
+selects a default factor, fixture, date, or current time.
+
+```bash
+python scripts/backtest_dag.py --factor factor.json --market market.json --output-dir result \
+  --strategy-id strategy-id --horizon 5 --top-pct 0.10 --fee-bps 15 --factor-id factor-id
+```
 
 > 把信号 `[date × symbol]` 模拟交易出来，得到净值 / 回撤 / 换手 / 分组收益。从"统计相关"走向"可执行收益"的关键一步。
 

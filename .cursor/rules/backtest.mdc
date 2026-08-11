@@ -1,0 +1,7 @@
+---
+description: Use the canonical skill-backtest DAG contract.
+globs: ["**/backtest_dag.py"]
+alwaysApply: false
+---
+
+Read [SKILL.md](SKILL.md). Invoke only the explicit DAG CLI; do not invent defaults or relax its contract checks.
